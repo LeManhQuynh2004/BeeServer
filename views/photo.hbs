@@ -1,0 +1,273 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.17.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; background-color:
+      #f8f9fa; margin: 0; } #wrapper { display: flex; } #sidebar { height: auto;
+      background-color: #263544; padding-top: 20px; } #content { flex: 1;
+      transition: margin-left 0.5s; max-height: 100vh; overflow-y: auto; }
+      @media (max-width: 768px) { #sidebar { margin-left: -250px; } #content {
+      margin-left: 0; } } a { color: white; } .nav-link { font-size: 15px;
+      color: white !important; /* Sử dụng !important để ghi đè các giá trị màu
+      sắc khác nếu có */ } .nav-item:hover { background-color: #1e2a30; } .title
+      { font-weight: bold;font-size: 20px; color: white; } .fa-custom-color {
+      color: white; /* Màu đỏ */ } .fa-custom-size { font-size: 1.2rem; /* Kích
+      thước 1.5rem (có thể điều chỉnh theo nhu cầu) */ }
+    </style>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar">
+        <div class="text-center p-2">
+          <img src="https://ap.poly.edu.vn/images/logo.png" alt="" />
+        </div>
+        <hr class="bg-light" />
+        <div class="sidebar-sticky p-3">
+          <span class="title">Menu</span>
+          <li class="nav-item d-flex mx-2 align-items-center p-1">
+            <i class="fa-solid fa-house fa-custom-color fa-custom-size"></i>
+            <a class="nav-link" href="#"> Trang Chủ </a>
+          </li>
+          <span class="title">Quản lý</span>
+          <ul class="nav flex-column">
+            <li class="nav-item d-flex mx-2 align-items-center p-1 bg-info rounded-pill">
+              <i
+                class="fa-brands fa-servicestack fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Quản lý ảnh in</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i class="fa-solid fa-user fa-custom-color fa-custom-size"></i>
+              <a class="nav-link" href="http://localhost:3000/users">Quản lý
+                người dùng</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i
+                class="fa-solid fa-bookmark fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Quản lý đặt lịch</a>
+            </li>
+            <li
+              class="nav-item d-flex mx-2 align-items-center p-1"
+            >
+              <i
+                class="fa-solid fa-person-dress fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Quản lý áo cưới</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i
+                class="fa-solid fa-newspaper fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Quản lý tin tức</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i class="fa-solid fa-image fa-custom-color fa-custom-size"></i>
+              <a class="nav-link" href="#">Quản lý Ulbum</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i class="fa-solid fa-video fa-custom-color fa-custom-size"></i>
+              <a class="nav-link" href="#">Quản lý Video</a>
+            </li>
+          </ul>
+          <span class="title">Thống kê</span>
+          <ul class="nav flex-column">
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i class="fab fa-servicestack fa-custom-color fa-custom-size"></i>
+              <a class="nav-link" href="#">Thống kê User</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i
+                class="fa-brands fa-servicestack fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Thống kê doanh thu</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i
+                class="fa-brands fa-servicestack fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Thống kê bài viết</a>
+            </li>
+            <li class="nav-item d-flex mx-2 align-items-center p-1">
+              <i
+                class="fa-brands fa-servicestack fa-custom-color fa-custom-size"
+              ></i>
+              <a class="nav-link" href="#">Thống kê dịch vụ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+
+      <!-- Page Content -->
+      <div id="content" class="w-100">
+        <div class="w-100">
+          <nav class="navbar bg-light border-bottom border-body shadow p-2">
+            <div class="container-fluid">
+              <a class="navbar-brand">Navbar</a>
+              <form class="d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn btn-outline-success"
+                  type="submit"
+                >Search</button>
+              </form>
+            </div>
+          </nav>
+        </div>
+        <div class="p-3 content">
+          <div class="d-flex justify-content-between mx-1">
+            <h2>Quản lý Ảnh In</h2>
+            <button class="btn btn-primary" id="btn_add">Thêm mới</button>
+          </div>
+          <table
+            class="table table-bordered mt-2 table-hover table-striped table-responsive"
+          >
+            <thead class="thead-dark text-center">
+              <th>STT</th>
+              <th>Hình ảnh</th>
+              <th>Người đặt</th>
+              <th>Giá thành</th>
+              <th>Số lượng</th>
+              <th>Kích thước</th>
+              <th>Chất liệu</th>
+              <th>Ghi chú</th>
+              <th>Hành động</th>
+            </thead>
+
+            <tbody id="app">
+                
+            </tbody>
+          </table>
+
+          <div
+            class="offcanvas offcanvas-end"
+            tabindex="-1"
+            id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel"
+          >
+            <div class="offcanvas-header">
+              <button
+                type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <script>
+        const url = "http://localhost:3000/photos/data"
+        let body = document.querySelector('#app')
+        const handleCallData = () => {
+            fetch(url).then(res => res.json()).then(renderLayout).catch(err => console.log(err))
+        }
+        const renderLayout = (data) => {
+            let htmls = data.map((item,index) => {
+                return  `
+                <tr class = "text-center">
+                    <td>${index + 1}</td>
+                    <td><img class="info" 
+                          data-bs-toggle="offcanvas" 
+                          data-bs-target="#offcanvasRight" 
+                          aria-controls="offcanvasRight" 
+                          data-id="${item._id}" src="${
+                        item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
+                    <td>${item.user.email}</td>
+                    <td>${item.price} VND</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.size}</td>
+                    <td>${item.material}</td>
+                    <td>${item.node}</td>
+                    <td>
+                        <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                        <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
+                    </td>
+                </tr>
+                `
+            })
+            body.innerHTML = htmls.join('')
+            let btn_info = document.querySelectorAll('.info')
+            let body_right = document.querySelector('.offcanvas-body');
+             for(const btn of btn_info) {
+          btn.addEventListener('click',() => {
+            const id = btn.dataset.id;
+            fetch(`${url}/${id}`).then(res => res.json()).then((data) => {
+              body_right.innerHTML = `
+                <div class="text-center">
+                  <h4 class="mb-4">Thông tin ảnh in</h4>
+                   <img src="${data.image}" class="rounded mx-2" style="width: 160px; height: 160px" />
+                  <div class="w-100 mt-4 text-start">
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Tên người đặt</span>
+                          <p class="mb-3">${data.user.username}</p>
+                        </div>
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Email người đặt</span>
+                          <p class="mb-3">${data.user.email}</p>
+                        </div>
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Giá thành</span>
+                          <p>${data.price.toLocaleString()} VND</p>
+                        </div>
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Ghi chú</span>
+                          <p>${data.node}</p>
+                        </div>
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Số lượng</span>
+                          <p>${data.quantity}</p>
+                        </div>
+                         <div>
+                          <span style="color: #95a5a6;font-size : 14px">Kích cỡ</span>
+                          <p>${data.size}</p>
+                        </div>
+                        <div>
+                          <span style="color: #95a5a6;font-size : 14px">Chất liệu</span>
+                          <p>${data.material}</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>                
+                </div>`
+            }).catch(er => console.log(er))
+         })
+        }
+        }
+        handleCallData()
+    </script>
+  </body>
+</html>
