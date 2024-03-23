@@ -1,231 +1,229 @@
+<!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.17.0/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+</head>
 
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <!-- Custom CSS -->
-    <style>
-      body { font-family: Arial, Helvetica, sans-serif;
-      background-color: #f8f9fa; margin: 0; } #wrapper { display: flex; }
-      #sidebar { height: auto; background-color: #263544; padding-top: 20px; }
-      #content { flex: 1; transition: margin-left 0.5s; max-height: 100vh;
-      overflow-y: auto; } @media (max-width: 768px) { #sidebar { margin-left:
-      -250px; } #content { margin-left: 0; } } a { color: white; } .nav-link {
-        font-size: 15px;
-      color: white !important; /* Sử dụng !important để ghi đè các giá trị màu
-      sắc khác nếu có */ } .nav-item:hover { background-color: #1e2a30; } .title
-      { font-weight: bold;font-size: 20px; color: white; } .fa-custom-color {
-      color: white; /* Màu đỏ */ } .fa-custom-size { font-size: 1.2rem; /* Kích
-      thước 1.5rem (có thể điều chỉnh theo nhu cầu) */ }
-    </style>
-  </head>
+<body>
+    <div class="container-fluid">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="logo-slack"></ion-icon>
+                        </span>
+                        <span class="title">Bee Studio</span>
+                    </a>
+                </li>
 
-  <body>
-    <!-- Sidebar -->
-    <div id="wrapper">
-      <!-- Sidebar -->
-      <div id="sidebar">
-        <div class="text-center p-2">
-          <img src="https://ap.poly.edu.vn/images/logo.png" alt="" />
+                <li>
+                    <a href="http://localhost:3000/">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Trang chủ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:3000/users">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Người dùng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:3000/photos">
+                        <span class="icon">
+                            <ion-icon name="image-outline"></ion-icon>
+                        </span>
+                        <span class="title">Ảnh in</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:3000/dress">
+                        <span class="icon">
+                            <ion-icon name="shirt-outline"></ion-icon>
+                        </span>
+                        <span class="title">Áo cưới</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="images-outline"></ion-icon>
+                        </span>
+                        <span class="title">Album ảnh</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:3000/news">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Tin tức</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost:3000/booking">
+                        <span class="icon">
+                            <ion-icon name="calendar-number-outline"></ion-icon>
+                        </span>
+                        <span class="title">Đặt lịch</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="videocam-outline"></ion-icon>
+                        </span>
+                        <span class="title">Video</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <hr class="bg-light" />
-        <div class="sidebar-sticky p-3">
-          <span class="title">Menu</span>
-          <li class="nav-item d-flex mx-2 align-items-center p-1">
-            <i class="fa-solid fa-house fa-custom-color fa-custom-size"></i>
-            <a class="nav-link" href="#"> Trang Chủ </a>
-          </li>
-          <span class="title">Quản lý</span>
-          <ul class="nav flex-column">
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-brands fa-servicestack fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý dịch vụ</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1 bg-info rounded-pill">
-              <i class="fa-solid fa-user fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="http://localhost:3000/users">Quản lý người dùng</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-solid fa-bookmark fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý đặt lịch</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-solid fa-person-dress fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý áo cưới</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-solid fa-newspaper fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý tin tức</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-solid fa-image fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý Ulbum</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-solid fa-video fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Quản lý Video</a>
-            </li>
-          </ul>
-          <span class="title">Thống kê</span>
-          <ul class="nav flex-column">
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-            <i class="fab fa-servicestack fa-custom-color fa-custom-size"></i>
-            <a class="nav-link" href="#">Thống kê User</a>
-          </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-brands fa-servicestack fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Thống kê doanh thu</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-brands fa-servicestack fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Thống kê bài viết</a>
-            </li>
-            <li class="nav-item d-flex mx-2 align-items-center p-1">
-              <i class="fa-brands fa-servicestack fa-custom-color fa-custom-size"></i>
-              <a class="nav-link" href="#">Thống kê dịch vụ</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- /#sidebar -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
 
-      <!-- Page Content -->
-      <div id="content" class="w-100">
-        <div class="w-100">
-          <nav class="navbar bg-light border-bottom border-body shadow p-2">
-            <div class="container-fluid">
-              <a class="navbar-brand">Navbar</a>
-              <form class="d-flex" role="search">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button
-                  class="btn btn-outline-success"
-                  type="submit"
-                >Search</button>
-              </form>
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="https://glints.com/vn/blog/wp-content/uploads/2022/05/customer-service-la%CC%80-gi%CC%80.jpg" alt="">
+                </div>
             </div>
-          </nav>
-        </div>
-        <div class="p-3 content">
-            <div class="d-flex justify-content-between mx-1">
-              <h2>Quản lý User</h2>
-              <button class="btn btn-primary" id="btn_add">Thêm mới</button>
-            </div>
-          <table
-            class="table table-bordered mt-2 table-hover table-striped table-responsive">
-            <thead class="thead-dark text-center">
-              <th>STT</th>
-              <th>Email</th>
-              <th>Mật Khẩu</th>
-              <th>Họ tên</th>
-              <th>Chức vụ</th>
-              <th>Hành động</th>
-            </thead>
-            
-            <tbody id="app">
-                
-            </tbody>
-          </table>
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Quản lý người dùng</h2>
+                        <a href="#" class="btn" id = "btn_add">Thêm</a>
+                    </div>  
+                   <div class="content">
+                     <table>
+                        <thead>
+                            <tr>
+                                  <th>STT</th>
+                                  <th>Email</th>
+                                  <th>Mật Khẩu</th>
+                                  <th>Họ tên</th>
+                                  <th>Chức vụ</th>
+                                  <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="app">
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-          <div class="offcanvas-header">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-          </div>
+                        </tbody>
+                    </table>
+                   </div>
+                </div>
+                </div> 
+            </div>
         </div>
-        </div>
-      </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-    ></script>
-     <script>
-        const url = "http://localhost:3000/users/data"
-        let body = document.querySelector('#app')
-        let content = document.querySelector('.content')
-        const handleCallData = () => {
-            fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
-        }
-        const renderData = (data) => {
-            let htmls = data.map((item,index) => {
-                return `
-               <tr class = "text-center">
-                    <td>${index + 1}</td>
-                    <td> <span class="info" 
-                          data-bs-toggle="offcanvas" 
-                          data-bs-target="#offcanvasRight" 
-                          aria-controls="offcanvasRight" 
-                          data-id="${item._id}">
-                      ${item.email}
-                    </span></td>
-                    <td><span class="password-field">${'*'.repeat(item.password.length)}</span></td>
-                    <td>${item.username}</td>
-                    <td>${item.role === 0 ? "Quản trị" : "Người dùng"}</td>
-                    <td style = "text-align : center">
-                        <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
-                        <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
-                    </td>
-                </tr>
-                `
-            })
-            body.innerHTML = htmls.join('')
-            let btn_info = document.querySelectorAll('.info')
-            let body_right = document.querySelector('.offcanvas-body');
-             for(const btn of btn_info) {
-          btn.addEventListener('click',() => {
-            const id = btn.dataset.id;
-            fetch(`${url}/${id}`).then(res => res.json()).then((data) => {
-              body_right.innerHTML = `
-                <div class="text-center">
-                  <h4 class="mb-4">Thông tin người dùng</h4>
-                   <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" class="rounded mx-2" style="width: 160px; height: 160px" />
-                  <div class="w-100 mt-4 text-start">
-                        <div>
-                          <span style="color: #95a5a6;font-size : 14px">Name</span>
-                          <p class="mb-3">${data.username}</p>
-                        </div>
-                        <div>
-                          <span style="color: #95a5a6;font-size : 14px">Email</span>
-                          <p>${data.email}</p>
-                        </div>
-                        <div>
-                          <span style="color: #95a5a6;font-size : 14px">Password</span>
-                          <p>${'*'.repeat(data.password.length)}</p>
-                        </div>
-                        <div>
-                          <span style="color: #95a5a6;font-size : 14px">Chức vụ</span>
-                          <p>${data.role === 0 ? "Quản trị" : "Người dùng"}</p>
-                        </div>
-                      </div>
-                    </div>
-                </div>                
-                </div>`
-            }).catch(er => console.log(er))
-         })
-        }
-        }
+    <!-- =========== Scripts =========  -->
+    <script>
 
-        handleCallData()
-     </script>
-  </body>
+ let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+
+        toggle.onclick = function () {
+          navigation.classList.toggle("active");
+          main.classList.toggle("active");
+        };
+  let btn_add = document.querySelector('#btn_add')
+  const url = "http://localhost:3000/users/data";
+  let body = document.querySelector('#app');
+  let content = document.querySelector('.content');
+  //POST
+  btn_add.addEventListener('click', () => {
+    content.innerHTML = `
+    
+    <form action="/uploadfile" enctype="multipart/form-data" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" required />
+
+      <input type="file" name="avatar" />
+
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" required />
+
+      <div style = "width : 100%;display : flex ;justify-content: center;
+  align-items: center;"><input type="submit" style = "width : 100px;" value="Add User" /></div>
+    </form>
+    
+    `;
+});
+  const handleCallData = () => {
+    fetch(url)
+      .then(res => res.json())
+      .then(renderData)
+      .catch(err => console.log(err));
+  };
+
+  const renderData = (data) => {
+    let htmls = data.map((item, index) => {
+      return `
+        <tr>
+          <td style="text-align: center">${index + 1}</td>
+          <td style="text-align: center"><span>${item.email}</span></td>
+          <td style="text-align: center"><span class="password-field">${'*'.repeat(item.password.length)}</span></td>
+          <td style="text-align: center">${item.username}</td>
+          <td style="text-align: center">${item.role === 0 ? "Quản trị" : "Người dùng"}</td>
+          <td style = "max-width: 150px;
+                               overflow: hidden;
+                               text-align : center;
+                               text-overflow: ellipsis;
+                               white-space: wrap;">
+            <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+            <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
+          </td>
+        </tr>
+      `;
+    });
+
+    body.innerHTML = htmls.join('');
+  };
+
+  handleCallData();
+</script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
 </html>

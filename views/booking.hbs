@@ -122,7 +122,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý ảnh in</h2>
+                        <h2>Quản lý người dùng</h2>
                         <a href="#" class="btn" id = "btn_add">Thêm</a>
                     </div>  
                    <div class="content">
@@ -130,12 +130,9 @@
                         <thead>
                             <tr>
                                   <th>STT</th>
-                                  <th>Hình ảnh</th>
-                                  <th>Người đặt</th>
-                                  <th>Giá thành</th>
-                                  <th>Số lượng</th>
-                                  <th>Kích thước</th>
-                                  <th>Chất liệu</th>
+                                  <th>Họ tên</th>
+                                  <th>Email</th>
+                                  <th>Số điện thoại</th>
                                   <th>Ghi chú</th>
                                   <th>Hành động</th>
                             </tr>
@@ -164,34 +161,25 @@
           main.classList.toggle("active");
         };
 
-  const url = "http://localhost:3000/photos/data"
-        let body = document.querySelector('#app')
-        const handleCallData = () => {
-            fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
-        }
+        const url = "http://localhost:3000/booking/data"
+              let body = document.querySelector('#app')
+              const handleCallData = () => {
+                fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
+              }
 
   const renderData = (data) => {
-     
     let htmls = data.map((item, index) => {
       return `
-       <tr class = "text-center">
-                    <td style="text-align">${index + 1}</td>
-                    <td style="text-align"><img class="info" 
-                          data-bs-toggle="offcanvas" 
-                          data-bs-target="#offcanvasRight" 
-                          aria-controls="offcanvasRight" 
-                          data-id="${item._id}" src="${
-                        item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
-                    <td style="text-align">${item.user.email}</td>
-                    <td style="text-align">${item.price} VND</td>
-                    <td style="text-align">${item.quantity}</td>
-                    <td style="text-align">${item.size}</td>
-                    <td style="text-align">${item.material}</td>
-                    <td style="text-align">${item.node}</td>
-                    <td style="text-align">
-                        <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
-                        <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
-                    </td>
+        <tr style="text-align: center">
+                  <td style="text-align: center">${index + 1}</td>
+                  <td style="text-align: center">${item.name}</td>
+                  <td style="text-align: center">${item.user.email}</td>
+                  <td style="text-align: center">${item.phoneNumber}</td>
+                  <td style="text-align: center">${item.message}</td>
+                  <td style="text-align: center">
+                     <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                     <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
+                  </td>
                 </tr>
       `;
     });

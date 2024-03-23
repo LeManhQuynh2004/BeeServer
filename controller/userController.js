@@ -1,16 +1,31 @@
+const ConfigUpload = require('../config/upload');
 const { User } = require('../model/model')
 
 const userController = {
     //POST USER
-    addUser: async (req, res) => {
+    addUser: (ConfigUpload.single('avatar'), async (req, res) => {
         try {
-            const newUser = new User(req.body);
-            await newUser.save()
-            res.status(200).json("ADD SUCCESSFULLY")
+            const data = req.body;
+            console.log(data)
+            // const file = req.file;
+            // if (!file) {
+            //     return res.status(400).json({ error: 'No file uploaded' });
+            // }
+            // const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${file.name}`;
+            // const newUser = new User({
+            //     username: data.username,
+            //     email: data.email,
+            //     password: data.password,
+            //     avatar: imageUrl,
+            //     role: data.role,
+            // });
+            // await newUser.save();
+            // res.status(200).json("Add successFully");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({ error: error.message });
         }
-    },
+    }),
+
     //GET ALL USER
     getAllUser: async (req, res) => {
         try {

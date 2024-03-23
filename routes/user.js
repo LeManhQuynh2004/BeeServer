@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controller/userController');
 
 // Đường dẫn cho các tác vụ CRUD của người dùng
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('user');
 });
 
@@ -12,9 +12,6 @@ router.get('/data', userController.getAllUser);
 
 // Lấy một người dùng cụ thể
 router.get('/data/:id', userController.getAnUser);
-
-// Thêm người dùng mới
-router.post('/data', userController.addUser);
 
 // Xóa người dùng
 router.delete('/data/:id', userController.deleteUser);

@@ -1,52 +1,53 @@
-const {Category} = require('../model/model')
+const { Category } = require('../model/model');
 
 const categoryController = {
     //GET ALL CATEGORY
-    getAllCategory : async (req,res) => {
+    getAllCategory: async (req, res) => {
         try {
-            const category = Category.find()
-            res.status(200).json(category)
+            const categories = await Category.find();
+            res.status(200).json(categories);
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     },
     //POST CATEGORY
-    postCategory : async (req,res) => {
+    postCategory: async (req, res) => {
         try {
-            const newCategory = new Category(req.body)
+            const newCategory = new Category(req.body);
             await newCategory.save();
-            res.status(200).json("ADD SUCCESSFULLY")
+            res.status(200).json("ADD SUCCESSFULLY");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     },
     //GET AN CATEGORY
-    getAnCategory : async (req,res) => {
+    getAnCategory: async (req, res) => {
         try {
             const category = await Category.findById(req.params.id);
-            res.status(200).json(category)
+            res.status(200).json(category);
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     },
     //DELETE CATEGORY
-    deleteCategory : async (req,res) => {
+    deleteCategory: async (req, res) => {
         try {
             await Category.findByIdAndDelete(req.params.id);
-            res.status(200).json("DELETE SUCCESSFULLY")
+            res.status(200).json("DELETE SUCCESSFULLY");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     },
     //UPDATE CATEGORY
-    updateCategory : async (req,res) => {
+    updateCategory: async (req, res) => {
         try {
             const category = await Category.findById(req.params.id);
-            await category.UpdateOne({$set : req.body})
-            res.status(200).json("UPDATE SUCCESSFULLY")
+            await category.updateOne({ $set: req.body });
+            res.status(200).json("UPDATE SUCCESSFULLY");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     }
-}
+};
+
 module.exports = categoryController;

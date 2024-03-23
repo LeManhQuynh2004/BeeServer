@@ -1,13 +1,4 @@
 const { Service } = require('../model/model');
-const cloudinary = require('cloudinary').v2;
-
-cloudinary.config({
-    cloud_name: 'plays',
-    api_key: '819245511475772',
-    api_secret: 'I9ml-5nJhk5LDTEEMTBtFdq9nW4',
-    secure: true
-});
-console.log(cloudinary.config());
 
 const serviceController = {
     //ADD SERVICE
@@ -55,35 +46,6 @@ const serviceController = {
             res.status(200).json("Update SuccessFully");
         } catch (err) {
             res.status(500).json(err);
-        }
-    },
-
-    postImage: async (imagePath) => {
-        const options = {
-            use_filename: true,
-            unique_filename: false,
-            overwrite: true,
-        };
-        try {
-            // Upload the image
-            const result = await cloudinary.uploader.upload(imagePath, options);
-            console.log(result);
-            return result.public_id;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-    uploadImage: async (req,res) => {
-        try {
-            const path = 'https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg';
-            const imageUri = await this.postImage(path)
-            if(imageUri != null){
-                res.send(imageUri)
-            }else{
-                res.send("Xẩy ra lỗi")
-            }
-        } catch (error) {
-            res.send("Xẩy ra lỗi Upload Image")
         }
     },
 }

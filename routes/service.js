@@ -17,6 +17,4 @@ router.put("/:id", serviceController.updateService);
 //DELETE SERVICE
 router.delete("/:id", serviceController.deleteData)
 
-router.post("/uploadImage", serviceController.uploadImage)
-
 module.exports = router; 

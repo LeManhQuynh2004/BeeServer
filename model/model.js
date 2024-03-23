@@ -10,7 +10,7 @@ const serviceSchema = new mongoose.Schema({
         require: true
     },
     image: {
-        type: String,
+        type: Array,
         require: true
     },
     describe: {
@@ -62,6 +62,12 @@ const UserSchema = mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Photo"
+        }
+    ],
+    bookings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Booking"
         }
     ]
 })
@@ -155,7 +161,7 @@ let NewSchema = mongoose.Schema({
         type: Number,
         require: true
     },
-    data: {
+    date: {
         type: String,
         require: true
     },
@@ -181,11 +187,46 @@ let CategorySchema = mongoose.Schema({
         }
     ]
 })
+let BookingSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+    },
+    message: {
+        type: String,   
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
+});
+let ContractSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+    },
+    message: {
+        type: String,   
+        required: true
+    },
+})
 
 let Service = mongoose.model("Service", serviceSchema);
+let Booking = mongoose.model("Booking", BookingSchema);
+let Contract = mongoose.model("Contract",ContractSchema);
 let Dress = mongoose.model("Dress", WeddingDress);
 let User = mongoose.model("User", UserSchema);
 let Category = mongoose.model("Category", CategorySchema);
 let News = mongoose.model("News", NewSchema);
 let Photo = mongoose.model("Photo", PhotoSchema);
-module.exports = { Service, User, Dress, Photo };
+
+module.exports = { Service, User, Dress, Photo, Category, News, Booking , Contract};
