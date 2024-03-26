@@ -6,6 +6,7 @@ var cors = require('cors')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
+const dotenv = require('dotenv')
 // const pass = 'ad7yXhV2BHZPlLTH';
 // const mongodblink = "mongodb+srv://quynhlmdev:<password>@cluster0.51dj2cr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 var userRouter = require('./routes/user')
@@ -17,7 +18,9 @@ var newRouter = require('./routes/news');
 var bookingRouter = require('./routes/booking');
 let albumRouter = require('./routes/album');
 
-mongoose.connect('mongodb+srv://quynhlmph32353:qnkRTuU9PrE3L9iW@cluster0.e7sqtqm.mongodb.net/BeeStudio')
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected!'))
   .catch(error => console.error('Connection error:', error));
 

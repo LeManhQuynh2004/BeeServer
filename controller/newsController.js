@@ -1,22 +1,6 @@
 const { News , Category} = require('../model/model');
 
 const newsController = {
-    //POST NEWS
-    addNews: async (req, res) => {
-        try {
-            // Dữ liệu từ yêu cầu có thể được truy cập thông qua req.body
-            const news = new News(req.body);
-            console.log(req.body)
-            // const saveNews = await news.save();//phương thức save() được sử dụng để lưu một đối tượng vào cơ sở dữ liệu MongoDB
-            // if (req.body.category) {
-            //     const category = await Category.findById(req.body.category);
-            //     await category.updateOne({ $push: { news: saveNews._id } });
-            // }
-            // res.status(200).json(saveNews);
-        } catch (err) {
-            res.status(500).json(err);
-        }
-    },
     getAllNews: async (req, res) => {
         try {
             const news = await News.find().populate('category')
