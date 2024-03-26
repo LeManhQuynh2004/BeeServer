@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+        >
 </head>
 
 <body>
@@ -122,7 +126,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý tin tức</h2>
+                        <h1>Quản lý tin tức</h1>
                         <a href="#" class="btn" id = "btn_add">Thêm</a>
                     </div>  
                    <div class="content">
@@ -155,7 +159,7 @@
     <!-- =========== Scripts =========  -->
     <script>
 
- let toggle = document.querySelector(".toggle");
+        let toggle = document.querySelector(".toggle");
         let navigation = document.querySelector(".navigation");
         let main = document.querySelector(".main");
 
@@ -164,7 +168,9 @@
           main.classList.toggle("active");
         };
 
- const url = "http://localhost:3000/news/data"
+        const url = "http://localhost:3000/news/data"
+        let btn_add = document.querySelector('#btn_add')
+        let content = document.querySelector('.content')
         let body = document.querySelector('#app')
         const handleCallData = () => {
             fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
@@ -190,9 +196,9 @@
                           data-bs-target="#offcanvasRight" 
                           aria-controls="offcanvasRight" 
                           data-id="${item._id}" src="${
-                        item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
+                        item.image ? item.image : "https://png.pngtree.com/png-clipart/20211229/ourmid/pngtree-cartoon-snail-loading-gif-dynamic-diagram-png-image_4144104.png"}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
                     <td style="text-align: center">${item.date}</td>
-                    <td style="text-align: center">${item.category.name}</td>
+                    <td style="text-align: center">${item.category.name ? item.category.name : "Loading"}</td>
                     <td style="text-align: center">${item.source}</td>
                     <td style="text-align: center">${item.quantity_View}</td>
                     <td style="text-align: center">
@@ -202,16 +208,178 @@
             </tr>
       `;
     });
-
     body.innerHTML = htmls.join('');
+    let btn_delete = document.querySelectorAll('.btn_delete')
+    for(const btn of btn_delete){
+        btn.addEventListener('click',() => {
+            let id = btn.dataset.id
+            return confirm("Bạn có chắc chắn muốn xóa bản tin này không ?") ? handleDeleteData(id) : "";
+        })
+    }
   };
+    btn_add.addEventListener('click',() => {
+        content.innerHTML = `
+             <form id="form-tin-tuc" enctype="multipart/form-data" method="POST">
 
+                <div class="field">
+                    <label class="label">Tiêu đề</label>
+                        <div class="control">
+                            <input class="input is-rounded" name = "title" type="text" placeholder="Rounded input" required />
+                        </div>
+                </div>
+
+                <div class="field">
+                      <label class="label">Nội dung :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "content" placeholder="Textarea"></textarea>
+                      </div>
+                </div>
+
+                 <div class="field">
+                      <label class="label">Hình ảnh sản phẩm :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="file" name="image" placeholder="Rounded input" />
+                      </div>
+                </div>
+
+                <div class="select .is-flex .is-flex-direction-row">
+                <select id="category" name="category">
+                            
+                </select>
+                </div>
+                <button id = "btn_add_category" class="button button is-primary">+</button>
+                <div id = "content_add_category" style = "display : flex ;align-items: flex-end"></div>
+             <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
+         </form>
+        `
+
+        const selectElement = document.getElementById("category");
+        let category_id = "";
+
+        fetch('http://localhost:3000/category')
+                        .then(res => res.json())
+                        .then((data) => {
+                            const options = data.map((item, index) => {
+                                return `<option data-id="${item._id}" key="${index}">${item.name}</option>`;
+                            }).join("");
+                            selectElement.innerHTML = `
+                                <option value="">Select category</option>
+                                ${options}
+                            `;
+                        })
+                        .catch(err => console.error(err));
+
+        selectElement.addEventListener('change', () => {
+                        const selectedOption = selectElement.options[selectElement.selectedIndex];
+                        const selectedId = selectedOption.dataset.id;
+                        category_id = selectedId;
+        });
+        const formTinTuc = document.getElementById("form-tin-tuc");
+        formTinTuc.addEventListener('submit',(event) => {
+            event.preventDefault();
+
+            const formDataNews = new FormData(formTinTuc);
+            formDataNews.set('category',category_id);
+
+            fetch('http://localhost:3000/news',{
+                method : 'POST',
+                body : formDataNews
+            }).then(res => res.json()).then(() => {
+                alert('Thêm tin tức thành công !')
+                window.location.reload();
+            }).catch(err => console.log(err))
+        })
+
+        btn_add_category.addEventListener('click', (event) => {
+    event.preventDefault();
+    content_add_category.innerHTML = `
+        <form>
+            <div class="field m-1" style="width: 70%">
+                <label class="label">Tên Thể Loại</label>
+                <div class="control">
+                    <input class="input is-rounded" name="name" id = "category_name" type="text" placeholder="Tên thể loại" required />
+                </div>
+            </div>
+            <button class="button is-primary" style="height: 43px;" type="submit" id='add_category'>Thêm</button>
+        </form>
+    `;
+
+    let add_category = document.querySelector('#add_category');
+    let category_name = document.querySelector("#category_name")
+
+    add_category.addEventListener("click", (event) => {
+        event.preventDefault();        
+        let category = {
+            name : category_name.value
+        }
+        console.log(category)
+
+        fetch('http://localhost:3000/category/data', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(() => {
+            content_add_category.innerHTML = ``;
+            fetch('http://localhost:3000/category')
+                        .then(res => res.json())
+                        .then((data) => {
+                            const options = data.map((item, index) => {
+                                return `<option data-id="${item._id}" key="${index}">${item.name}</option>`;
+                            }).join("");
+                            selectElement.innerHTML = `
+                                <option value="">Select category</option>
+                                ${options}
+                            `;
+                        })
+                        .catch(err => console.error(err));
+        })
+        .catch(err => console.log(err));
+        });
+});
+    })
   handleCallData();
+  const handleDeleteData = (id) => {
+    fetch(`${url}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Có lỗi xảy ra khi xóa bản tin');
+        }
+        return res.json();
+    })
+    .then(() => {
+        alert("Xóa bản tin thành công");
+        window.location.reload()
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Đã xảy ra lỗi khi xóa bản tin");
+    });
+}
 </script>
-
-    <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
+
+
+
+ {{!-- formDataNews.set('category',category_id);
+            console.log("Kiểm tra ID")
+            console.log(formDataNews.get('category'))
+            fetch('http://localhost:3000/news',{
+                method : 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body : formDataNews
+            }).then(res => res.json()).then(() => {
+                alert('Thêm tin tức thành công !')
+                window.location.reload();
+            }).catch(err => console.log(err)) --}}

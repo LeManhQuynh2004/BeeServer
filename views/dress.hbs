@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
 </head>
 
 <body>
@@ -122,7 +123,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý áo cưới</h2>
+                        <h1>Quản lý áo cưới</h1>
                         <a href="#" class="btn" id = "btn_add">Thêm</a>
                     </div>  
                    <div class="content">
@@ -180,7 +181,7 @@
                     <td style = "text-align : center">${item.rental_price.toLocaleString()} VND</td>
                     <td style = "text-align : center">
                     <img src="${
-                        item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;">
+                        item.image[0]}" alt="" style="width: 70px; height: 70px; border-radius: 10px;">
                     </td>
                     <td style = "text-align : center">${item.describe}</td>
                     <td style = "text-align : center">
@@ -191,8 +192,104 @@
                 `
             })
             body.innerHTML = htmls.join('')
+            let btn_delete = document.querySelectorAll('.btn_delete');
+                for(const btn of btn_delete){
+                    btn.addEventListener('click',()=> {
+                        const id = btn.dataset.id
+                        return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không ?') ? handelDeleteData(id) : ""
+                    })
+                }
+         }
+         const handelDeleteData = (id) => {
+            fetch(`${url}/${id}`, {
+                method : 'DELETE'
+            }).then(res => res.json()).then(() => {
+                alert("Xóa thành công");
+                window.location.reload();
+            }).catch(err => console.log(err))
          }
         handleCallData()
+        let btn_add = document.querySelector('#btn_add')
+        let content = document.querySelector('.content')
+        console.log(btn_add)
+        console.log(content)
+        btn_add.addEventListener('click',() => {
+            content.innerHTML = `
+                  <form action="/dress/data" style = "margin-top: 10px;" enctype="multipart/form-data" method="POST">                    
+                    <div class="field">
+                      <label class="label">Tên dịch vụ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name = "name" placeholder="Rounded input" />
+                      </div>
+                    </div> 
+
+                    <div class="field">
+                      <label class="label">Giá bán :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="number" name="price" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Giá thuê :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="number" name="rental_price" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                     <div class="field">
+                      <label class="label">Số lượng :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="number" name="quantity" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Hình ảnh sản phẩm :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="file" name="image" placeholder="Rounded input" multiple/>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Mô tả sản phẩm :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "describe" placeholder="Textarea"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Màu sắc :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="color" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Kiểu dáng</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="style" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                     <div class="field">
+                      <label class="label">Chất liệu</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="material" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                     <div class="field">
+                      <label class="label">Kích cỡ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="size" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+                    <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
+                  </form>
+            `
+        })
 
 
 </script>

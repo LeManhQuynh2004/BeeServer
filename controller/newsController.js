@@ -6,12 +6,13 @@ const newsController = {
         try {
             // Dữ liệu từ yêu cầu có thể được truy cập thông qua req.body
             const news = new News(req.body);
-            const saveNews = await news.save();//phương thức save() được sử dụng để lưu một đối tượng vào cơ sở dữ liệu MongoDB
-            if (req.body.category) {
-                const category = await Category.findById(req.body.category);
-                await category.updateOne({ $push: { news: saveNews._id } });
-            }
-            res.status(200).json(saveNews);
+            console.log(req.body)
+            // const saveNews = await news.save();//phương thức save() được sử dụng để lưu một đối tượng vào cơ sở dữ liệu MongoDB
+            // if (req.body.category) {
+            //     const category = await Category.findById(req.body.category);
+            //     await category.updateOne({ $push: { news: saveNews._id } });
+            // }
+            // res.status(200).json(saveNews);
         } catch (err) {
             res.status(500).json(err);
         }
@@ -42,16 +43,21 @@ const newsController = {
             res.status(500).json(error);
         }
     },
-    deleteNews : async (req,res) => {
+    deleteNews: async (req, res) => {
         try {
-            await Category.updateMany({news : req.params.id},{$pull : req.params.id})
-            //User có nhiều ảnh
-            //dùng lênh updateMany tìm ảnh của tác giả đó và lấy ra khỏi array đó
+            // Loại bỏ ID của tin tức khỏi mảng 'news' trong các documents của collection 'Category'
+            await Category.updateMany({ news: req.params.id }, { $pull: { news: req.params.id } });
+    
+            // Xóa tin tức khỏi collection 'News' dựa trên ID
             await News.findByIdAndDelete(req.params.id);
-            res.status(200).json("Delete Successfully")
+    
+            // Trả về phản hồi thành công nếu không có lỗi
+            res.status(200).send('Bản ghi đã được xóa thành công');
         } catch (error) {
+            // Trả về phản hồi lỗi nếu có lỗi xảy ra
             res.status(500).json(error);
         }
     }
+    
 }
 module.exports = newsController

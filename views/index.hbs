@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
 </head>
 
 <body>
@@ -122,7 +123,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý Dịch Vụ</h2>
+                        <h1>Quản lý Dịch Vụ</h1>
                         <a href="#" class="btn" id = "btn_add">Thêm</a>
                     </div>  
                    <div class="content">
@@ -166,83 +167,65 @@
         let btn_add = document.querySelector('#btn_add')
         btn_add.addEventListener('click',() => {
             content.innerHTML = `
-                  <form style = "margin-top: 10px;" enctype="multipart/form-data">
-                    <label for="name">Tên dịch vụ :</label>
-                    <input type="text" id="name" name="name" required>
+                  <form action="/service" style = "margin-top: 10px;" enctype="multipart/form-data" method="POST">                    
+                    <div class="field">
+                      <label class="label">Tên dịch vụ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name = "name" placeholder="Rounded input" />
+                      </div>
+                    </div> 
 
-                    <label for="price">Giá dịch vụ :</label>
-                    <input type="number" id="price" name="price" required>
+                    <div class="field">
+                      <label class="label">Giá dịch vụ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="price" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="image">Hình ảnh sản phẩm :</label>
-                    <input type="file" id="image" name="image" required>
+                    <div class="field">
+                      <label class="label">Hình ảnh sản phẩm :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="file" name="image" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="describe">Mô tả :</label>
-                    <input type="text" id="describe" name="describe" required>
+                    <div class="field">
+                      <label class="label">Mô tả sản phẩm :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "describe" placeholder="Textarea"></textarea>
+                      </div>
+                    </div>
 
-                    <label for="location">Địa chỉ :</label>
-                    <input type="text" id="location" name="location" required>
+                    <div class="field">
+                      <label class="label">Địa chỉ :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="location" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="utilities">Tiện ích (Danh sách) :</label>
-                    <input type="text" id="utilities" name="utilities" required>
+                    <div class="field">
+                      <label class="label">Thời gian</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="time" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="time">Thời gian :</label>
-                    <input type="text" id="time" name="time" required>
+                    <div class="field">
+                      <label class="label">Tiện ích đi kèm :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "utilities" placeholder="Textarea"></textarea>
+                      </div>
+                    </div>
 
-                    <label for="result">Kết quả (Danh sách) : </label>
-                    <input type="text" id="result" name="result" required>
-
-                    <div style = "text-align : center;"><button class = "btn-primary" type="submit" id='btn_submit'>Thêm</button></div>
+                    <div class="field">
+                      <label class="label">Kết quả nhận được :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "result" placeholder="Textarea"></textarea>
+                      </div>
+                    </div>
+                    <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
                   </form>
             `
-            const pro_name = document.querySelector("#name");
-            const pro_price = document.querySelector("#price");
-            const pro_describe = document.querySelector("#describe");
-            const pro_location = document.querySelector("#location");
-            const pro_time = document.querySelector("#time");
-            const pro_result = document.querySelector("#result");
-            const pro_utilities = document.querySelector("#utilities");
-            const btn_submit = document.querySelector("#btn_submit");
-            const results = [];
-            const utilitys = [];
-
-            btn_submit.addEventListener("click", (e) => {
-            e.preventDefault();
-
-             const formData = new FormData();
-             formData.append('image', document.getElementById('image').files[0]);
-             console.log(formData)
-
-            const utility = pro_utilities.value.split(",");
-            const mergedArray = utilitys.concat(utility);
-            const uniqueValues = new Set(mergedArray);
-            const resultArray = [...uniqueValues];
-
-            const result = pro_result.value.split(",");
-            const mergedArrayResult = results.concat(result);
-            const uniqueValuesResult = new Set(mergedArrayResult);
-            const resultArrayResult = [...uniqueValuesResult];
-
-            const Options = resultArray.filter((item) => {
-              return item != "";
-            });
-            const arrResults = resultArrayResult.filter((item) => {
-              return item != "";
-            });
-
-            const service = {
-              name: pro_name.value,
-              price: pro_price.value,
-              image:
-                "https://aocuoimailisa.vn/wp-content/uploads/2023/12/tron-goi-ngay-cuoi-trang-diem-co-dau-tai-tiem-hoac-tai-nha.jpg",
-              location: pro_location.value,
-              describe: pro_describe.value,
-              time: pro_time.value,
-              utilities: Options,
-              result: arrResults,
-              isFavorite: false,
-            };
-            console.log(formData)
-          });
         })
         let url = "http://localhost:3000/service";
         const handleCallData = () => {
@@ -264,7 +247,7 @@
                   </td>
                   <td>${item.price} VND</td>
                   <td style = "text-align: center">
-                  <img src="${item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;">
+                  <img src="${item.image[0]}" alt="" style="width: 70px; height: 70px; border-radius: 10px;">
                     </td>
                   <td style = "max-width: 300px;
                                overflow: hidden;
@@ -300,93 +283,72 @@
       const id = btn.dataset.id;
       fetch(`${url}/${id}`).then(res => res.json()).then((data) => {
          content.innerHTML = `
-                  <form style = "margin-top: 10px;">
-                    <label for="name">Tên dịch vụ :</label>
-                    <input type="text" id="name" value = "${data.name}" name="name" required>
+                      <form style = "margin-top: 10px;" enctype="multipart/form-data" method="PUT">    
 
-                    <label for="price">Giá dịch vụ :</label>
-                    <input type="number" id="price" value = "${data.price}" name="price" required>
+                    <div class="field">
+                      <label class="label">Tên dịch vụ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" value = "${data.name}" name = "name" placeholder="Rounded input" />
+                      </div>
+                    </div> 
 
-                    <label for="image">Đường dẫn ảnh :</label>
-                    <input type="text" id="image" name="image" required>
+                    <div class="field">
+                      <label class="label">Giá dịch vụ</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" value = "${data.price}" name="price" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="describe">Mô tả :</label>
-                    <input type="text" id="describe" value = "${data.describe}" name="describe" required>
+                    <div class="field">
+                      <label class="label">Hình ảnh sản phẩm :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="file" name="image" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="location">Địa chỉ :</label>
-                    <input type="text" id="location" value = "${data.location}" name="location" required>
+                    {{!-- <div class="field">
+                      <figure class="image is-128x128">
+                        <img class="is-rounded" src="${data.image[0]}" />
+                      </figure>
+                    </div> --}}
 
-                    <label for="utilities">Tiện ích (Danh sách) :</label>
-                    <input type="text" id="utilities" value = "${data.utilities}" name="utilities" required>
+                    <div class="field">
+                      <label class="label">Mô tả sản phẩm :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "describe" placeholder="Textarea">${data.describe}</textarea>
+                      </div>
+                    </div>
 
-                    <label for="time">Thời gian :</label>
-                    <input type="text" id="time" value = "${data.time}" name="time" required>
+                    <div class="field">
+                      <label class="label">Địa chỉ :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="location" value = "${data.location}" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <label for="result">Kết quả (Danh sách) : </label>
-                    <input type="text" id="result" value = "${data.result}" name="result" required>
+                    <div class="field">
+                      <label class="label">Thời gian</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="text" name="time" value = "${data.time}" placeholder="Rounded input" />
+                      </div>
+                    </div>
 
-                    <div style = "text-align : center;"><button class = "btn-primary" type="submit" id='btn_submit'>Thêm</button></div>
+                    <div class="field">
+                      <label class="label">Tiện ích đi kèm :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "utilities" placeholder="Textarea">${data.utilities}</textarea>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Kết quả nhận được :</label>
+                      <div class="control">
+                        <textarea class="textarea" name = "result"  placeholder="Textarea">${data.result}</textarea>
+                      </div>
+                    </div>
+                    <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
                   </form>
             `
-
-              const pro_name = document.querySelector("#name");
-              const pro_price = document.querySelector("#price");
-              const pro_describe = document.querySelector("#describe");
-              const pro_location = document.querySelector("#location");
-              const pro_time = document.querySelector("#time");
-              const pro_result = document.querySelector("#result");
-              const pro_utilities = document.querySelector("#utilities");
-              const btn_submit = document.querySelector("#btn_submit");
-              const results = [...data.result];
-               const utilitys = [...data.utilities];
-
-              btn_submit.addEventListener("click", (e) => {
-            e.preventDefault();
-
-            const utility = pro_utilities.value.split(",");
-            const mergedArray = utilitys.concat(utility);
-            const uniqueValues = new Set(mergedArray);
-            const resultArray = [...uniqueValues];
-
-            const result = pro_result.value.split(",");
-            const mergedArrayResult = results.concat(result);
-            const uniqueValuesResult = new Set(mergedArrayResult);
-            const resultArrayResult = [...uniqueValuesResult];
-
-            const Options = resultArray.filter((item) => {
-              return item != "";
-            });
-            const arrResults = resultArrayResult.filter((item) => {
-              return item != "";
-            });
-
-            const service = {
-              name: pro_name.value,
-              price: pro_price.value,
-              image:
-                "https://aocuoimailisa.vn/wp-content/uploads/2023/12/tron-goi-ngay-cuoi-trang-diem-co-dau-tai-tiem-hoac-tai-nha.jpg",
-              location: pro_location.value,
-              describe: pro_describe.value,
-              time: pro_time.value,
-              utilities: Options,
-              result: arrResults,
-              isFavorite: false,
-            };
-            fetch(`${url}/${data._id}`, {
-              method: "PUT",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(service),
-            })
-              .then((res) => res.json())
-              .then(() => {
-                alert("Sửa thành công");
-                window.location.reload();
-              })
-              .catch((err) => console.log(err));
-          });
       }).catch(err => console.log(err))
     });
   }

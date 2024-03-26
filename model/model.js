@@ -33,10 +33,6 @@ const serviceSchema = new mongoose.Schema({
         type: Array,
         require: true
     },
-    isFavorite: {
-        type: Boolean,
-        require: true
-    }
 })
 const UserSchema = mongoose.Schema({
     username: {
@@ -101,7 +97,7 @@ const WeddingDress = mongoose.Schema({
         require: true
     },
     image: {
-        type: String,
+        type: Array,
         require: true
     },
     style: {
@@ -190,15 +186,15 @@ let CategorySchema = mongoose.Schema({
 let BookingSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        require: true
     },
     phoneNumber: {
         type: String,
-        required: true
+        require: true
     },
     message: {
-        type: String,   
-        required: true
+        type: String,
+        require: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -208,25 +204,40 @@ let BookingSchema = mongoose.Schema({
 let ContractSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        require: true
     },
     phoneNumber: {
         type: String,
-        required: true
+        require: true
     },
     message: {
-        type: String,   
-        required: true
+        type: String,
+        require: true
     },
+});
+let AlbumSchema = mongoose.Schema({
+    name: {
+        type: String,
+        require: true
+    },
+    image: {
+        type: Array,
+        require: true
+    },
+    describe: {
+        type: String,
+        require: true
+    }
 })
 
 let Service = mongoose.model("Service", serviceSchema);
 let Booking = mongoose.model("Booking", BookingSchema);
-let Contract = mongoose.model("Contract",ContractSchema);
+let Contract = mongoose.model("Contract", ContractSchema);
 let Dress = mongoose.model("Dress", WeddingDress);
 let User = mongoose.model("User", UserSchema);
 let Category = mongoose.model("Category", CategorySchema);
 let News = mongoose.model("News", NewSchema);
+let Album  = mongoose.model("Album",AlbumSchema);
 let Photo = mongoose.model("Photo", PhotoSchema);
 
-module.exports = { Service, User, Dress, Photo, Category, News, Booking , Contract};
+module.exports = { Service, User, Dress, Photo, Category, News, Booking, Contract ,Album};

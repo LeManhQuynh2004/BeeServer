@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                 <li>
                     <a href="http://localhost:3000/">
                         <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
+                        <ion-icon name="home-outline"></ion-icon>
                         </span>
                         <span class="title">Trang chủ</span>
                     </a>
@@ -122,7 +123,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý người dùng</h2>
+                        <h1>Quản lý người dùng</h1>
                         <a href="#" class="btn" id = "btn_add">Thêm</a>
                     </div>  
                    <div class="content">
@@ -165,26 +166,46 @@
   //POST
   btn_add.addEventListener('click', () => {
     content.innerHTML = `
-    
-    <form action="/uploadfile" enctype="multipart/form-data" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
+    <form action="/users/uploadfile" enctype="multipart/form-data" method="POST">
 
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" required />
+          <div class="field">
+            <label class="label">User Name</label>
+                <div class="control">
+                    <input class="input is-rounded" name = "username" type="text" placeholder="Rounded input" required />
+                </div>
+          </div>
 
-      <input type="file" name="avatar" />
+          <div class="field">
+            <label class="label">Password</label>
+                <div class="control">
+                    <input class="input is-rounded" name = "password" type="password" placeholder="Rounded input" required />
+                </div>
+          </div>
 
-      <label for="role">Role:</label>
-      <input type="text" id="role" name="role" required />
+         <div class="field">
+            <label class="label">Email :</label>
+                <div class="control">
+                    <input class="input is-rounded" name = "email" type="text" placeholder="Rounded input" required />
+                </div>
+         </div>
 
-      <div style = "width : 100%;display : flex ;justify-content: center;
-  align-items: center;"><input type="submit" style = "width : 100px;" value="Add User" /></div>
+         <div class="field">
+                      <label class="label">Hình ảnh sản phẩm :</label>
+                      <div class="control">
+                        <input class="input is-rounded" type="file" name="avatar" placeholder="Rounded input" />
+                      </div>
+                    </div>
+
+         <div class="field">
+            <label class="label">Role :</label>
+                <div class="control">
+                    <input class="input is-rounded" name = "role" type="text" placeholder="Rounded input" required />
+            </div>
+         </div>
+
+         <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
     </form>
-    
     `;
 });
   const handleCallData = () => {
@@ -212,11 +233,25 @@
             <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
           </td>
         </tr>
-      `;
-    });
-
-    body.innerHTML = htmls.join('');
+      `});
+        body.innerHTML = htmls.join('');
+        let btn_delete = document.querySelectorAll('.btn-danger')
+        for(const btn of btn_delete){
+        btn.addEventListener('click',() => {
+            let id = btn.dataset.id;
+            console.log(id)
+            return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không ?') ? handleDeleteData(id) : ""
+        });
+        }
   };
+  const handleDeleteData = (id) => {
+        fetch(`${url}/${id}`,{
+            method : 'DELETE'
+        }).then(res => res.json()).then(() => {
+                alert('Xóa thành công');
+                window.location.reload()
+        }).catch(err => console.log(err))
+  }
 
   handleCallData();
 </script>
