@@ -237,7 +237,7 @@ let Dress = mongoose.model("Dress", WeddingDress);
 let User = mongoose.model("User", UserSchema);
 let Category = mongoose.model("Category", CategorySchema);
 let News = mongoose.model("News", NewSchema);
-let Album  = mongoose.model("Album",AlbumSchema);
+let Album = mongoose.model("Album", AlbumSchema);
 let Photo = mongoose.model("Photo", PhotoSchema);
 
-module.exports = { Service, User, Dress, Photo, Category, News, Booking, Contract ,Album};
+module.exports = { Service, User, Dress, Photo, Category, News, Booking, Contract, Album };

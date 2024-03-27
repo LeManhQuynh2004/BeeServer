@@ -1,8 +1,8 @@
-const {Dress} = require('../model/model')
+const { Dress } = require('../model/model')
 
 const weddingDressController = {
     //POST DRESS
-    addDress : async (req,res) => {
+    addDress: async (req, res) => {
         try {
             const newDress = new Dress(req.body)
             await newDress.save();
@@ -12,7 +12,7 @@ const weddingDressController = {
         }
     },
     //GET ALL
-    getAllDress : async (req,res) => {
+    getAllDress: async (req, res) => {
         try {
             const users = await Dress.find()
             res.status(200).json(users)
@@ -21,7 +21,7 @@ const weddingDressController = {
         }
     },
     //GET AN DRESS
-    getAnDress : async (req,res) => {
+    getAnDress: async (req, res) => {
         try {
             const dress = await Dress.findById(req.params.id);
             res.status(200).json(dress)
@@ -30,7 +30,7 @@ const weddingDressController = {
         }
     },
     //DELETE
-    deleteDress : async (req,res) => {
+    deleteDress: async (req, res) => {
         try {
             await Dress.findByIdAndDelete(req.params.id);
             res.status(200).json("Delete SuccessFully")
@@ -39,7 +39,7 @@ const weddingDressController = {
         }
     },
     //UPDATE
-    updateDress : async (req,res) => {
+    updateDress: async (req, res) => {
         try {
             const dress = await Dress.findById(req.params.id);
             await dress.updateOne({ '$set': req.body })

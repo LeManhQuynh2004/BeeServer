@@ -116,71 +116,69 @@
                 </div>
 
                 <div class="user">
-                    <img src="https://glints.com/vn/blog/wp-content/uploads/2022/05/customer-service-la%CC%80-gi%CC%80.jpg" alt="">
+                    <img src="https://glints.com/vn/blog/wp-content/uploads/2022/05/customer-service-la%CC%80-gi%CC%80.jpg"
+                        alt="">
                 </div>
             </div>
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Quản lý ảnh in</h2>
-                        <a href="#" class="btn" id = "btn_add">Thêm</a>
-                    </div>  
-                   <div class="content">
-                     <table>
-                        <thead>
-                            <tr>
-                                  <th>STT</th>
-                                  <th>Hình ảnh</th>
-                                  <th>Người đặt</th>
-                                  <th>Giá thành</th>
-                                  <th>Số lượng</th>
-                                  <th>Kích thước</th>
-                                  <th>Chất liệu</th>
-                                  <th>Ghi chú</th>
-                                  <th>Hành động</th>
-                            </tr>
-                        </thead>
+                        <a href="#" class="btn" id="btn_add">Thêm</a>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Người đặt</th>
+                                    <th>Giá thành</th>
+                                    <th>Số lượng</th>
+                                    <th>Kích thước</th>
+                                    <th>Chất liệu</th>
+                                    <th>Ghi chú</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
 
-                        <tbody id="app">
+                            <tbody id="app">
 
-                        </tbody>
-                    </table>
-                   </div>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                </div> 
             </div>
         </div>
     </div>
-
-    <!-- =========== Scripts =========  -->
+    </div>
     <script>
 
- let toggle = document.querySelector(".toggle");
+        let toggle = document.querySelector(".toggle");
         let navigation = document.querySelector(".navigation");
         let main = document.querySelector(".main");
 
         toggle.onclick = function () {
-          navigation.classList.toggle("active");
-          main.classList.toggle("active");
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
         };
 
-         const url = "http://localhost:3000/photos/data"
+        const url = "http://localhost:3000/photos/data"
         let body = document.querySelector('#app')
         const handleCallData = () => {
             fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
         }
-  const renderData = (data) => {
-     
-    let htmls = data.map((item, index) => {
-      return `
+        const renderData = (data) => {
+
+            let htmls = data.map((item, index) => {
+                return `
        <tr class = "text-center">
                     <td style="text-align">${index + 1}</td>
                     <td style="text-align"><img class="info" 
                           data-bs-toggle="offcanvas" 
                           data-bs-target="#offcanvasRight" 
                           aria-controls="offcanvasRight" 
-                          data-id="${item._id}" src="${
-                        item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
+                          data-id="${item._id}" src="${item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
                     <td style="text-align">${item.user.email}</td>
                     <td style="text-align">${item.price} VND</td>
                     <td style="text-align">${item.quantity}</td>
@@ -193,28 +191,27 @@
                     </td>
                 </tr>
       `;
-    });
+            });
 
-    body.innerHTML = htmls.join('');
-     let btn_delete = document.querySelectorAll('.btn-danger')
-        for(const btn of btn_delete){
-        btn.addEventListener('click',() => {
-            let id = btn.dataset.id;
-            return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không ?') ? handleDeleteData(id) : ""
-     });
-    }
-  };
-    const handleDeleteData = (id) => {
-        fetch(`${url}/${id}`,{
-            method : 'DELETE'
-        }).then(res => res.json()).then(() => {
+            body.innerHTML = htmls.join('');
+            let btn_delete = document.querySelectorAll('.btn-danger')
+            for (const btn of btn_delete) {
+                btn.addEventListener('click', () => {
+                    let id = btn.dataset.id;
+                    return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không ?') ? handleDeleteData(id) : ""
+                });
+            }
+        };
+        const handleDeleteData = (id) => {
+            fetch(`${url}/${id}`, {
+                method: 'DELETE'
+            }).then(res => res.json()).then(() => {
                 alert('Xóa thành công');
                 window.location.reload()
-        }).catch(err => console.log(err))
-  }
-  handleCallData();
-</script>
-    <!-- ====== ionicons ======= -->
+            }).catch(err => console.log(err))
+        }
+        handleCallData();
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

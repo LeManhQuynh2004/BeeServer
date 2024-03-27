@@ -1,4 +1,4 @@
-const { News , Category} = require('../model/model');
+const { News, Category } = require('../model/model');
 
 const newsController = {
     getAllNews: async (req, res) => {
@@ -18,7 +18,7 @@ const newsController = {
             res.status(500).json(error);
         }
     },
-    updateNews: async (req,res) => {
+    updateNews: async (req, res) => {
         try {
             const news = await News.findById(req.params.id);
             await news.updateOne({ '$set': req.body });
@@ -31,10 +31,10 @@ const newsController = {
         try {
             // Loại bỏ ID của tin tức khỏi mảng 'news' trong các documents của collection 'Category'
             await Category.updateMany({ news: req.params.id }, { $pull: { news: req.params.id } });
-    
+
             // Xóa tin tức khỏi collection 'News' dựa trên ID
             await News.findByIdAndDelete(req.params.id);
-    
+
             // Trả về phản hồi thành công nếu không có lỗi
             res.status(200).send('Bản ghi đã được xóa thành công');
         } catch (error) {
@@ -42,6 +42,6 @@ const newsController = {
             res.status(500).json(error);
         }
     }
-    
+
 }
 module.exports = newsController

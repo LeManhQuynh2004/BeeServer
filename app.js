@@ -7,8 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
 const dotenv = require('dotenv')
-// const pass = 'ad7yXhV2BHZPlLTH';
-// const mongodblink = "mongodb+srv://quynhlmdev:<password>@cluster0.51dj2cr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 var userRouter = require('./routes/user')
 var serviceRouter = require('./routes/service')
 var dressRouter = require('./routes/dress')

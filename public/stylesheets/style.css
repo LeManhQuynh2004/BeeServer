@@ -102,11 +102,11 @@ body {
   text-align: start;
   white-space: nowrap;
 }
-.navigation ul li a .title:hover{
+.navigation ul li a .title:hover {
   color: #2a2185;
 }
 
-/* --------- curve outside ---------- */  
+/* --------- curve outside ---------- */
 .navigation ul li:hover a::before,
 .navigation ul li.hovered a::before {
   content: "";

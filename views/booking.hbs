@@ -148,49 +148,42 @@
             </div>
         </div>
     </div>
-
-    <!-- =========== Scripts =========  -->
     <script>
-
- let toggle = document.querySelector(".toggle");
+        let toggle = document.querySelector(".toggle");
         let navigation = document.querySelector(".navigation");
         let main = document.querySelector(".main");
 
         toggle.onclick = function () {
-          navigation.classList.toggle("active");
-          main.classList.toggle("active");
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
         };
 
         const url = "http://localhost:3000/booking/data"
-              let body = document.querySelector('#app')
-              const handleCallData = () => {
-                fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
-              }
+        let body = document.querySelector('#app')
+        const handleCallData = () => {
+            fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
+        }
 
-  const renderData = (data) => {
-    let htmls = data.map((item, index) => {
-      return `
-        <tr style="text-align: center">
-                  <td style="text-align: center">${index + 1}</td>
-                  <td style="text-align: center">${item.name}</td>
-                  <td style="text-align: center">${item.user.email}</td>
-                  <td style="text-align: center">${item.phoneNumber}</td>
-                  <td style="text-align: center">${item.message}</td>
-                  <td style="text-align: center">
-                     <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
-                     <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
-                  </td>
-                </tr>
-      `;
-    });
-
-    body.innerHTML = htmls.join('');
-  };
-
-  handleCallData();
-</script>
-
-    <!-- ====== ionicons ======= -->
+        const renderData = (data) => {
+            let htmls = data.map((item, index) => {
+                return `
+                <tr style="text-align: center">
+                        <td style="text-align: center">${index + 1}</td>
+                        <td style="text-align: center">${item.name}</td>
+                        <td style="text-align: center">${item.user.email}</td>
+                        <td style="text-align: center">${item.phoneNumber}</td>
+                        <td style="text-align: center">${item.message}</td>
+                        <td style="text-align: center">
+                            <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                            <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
+                        </td>
+                        </tr>
+            `;
+            });
+            body.innerHTML = htmls.join('');
+        };
+        handleCallData();
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

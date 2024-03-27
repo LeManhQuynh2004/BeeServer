@@ -1,15 +1,15 @@
-const {Booking , User} = require('../model/model')
+const { Booking, User } = require('../model/model')
 
 const bookingController = {
     //POST 
-    addBooking : async (req,res) =>{
+    addBooking: async (req, res) => {
         try {
             console.log(req.body);
             const newBooking = new Booking(req.body)
             const saveBooking = await newBooking.save()
-            if(req.body.user){
+            if (req.body.user) {
                 const user = await User.findById(req.body.user);
-                await user.updateOne({ $push: { bookings: saveBooking._id} });
+                await user.updateOne({ $push: { bookings: saveBooking._id } });
             }
             res.status(200).json(saveBooking)
         } catch (error) {
@@ -17,25 +17,25 @@ const bookingController = {
         }
     },
     //GET ALL
-    getAllBooking : async (req,res) => {
+    getAllBooking: async (req, res) => {
         try {
             const bookings = await Booking.find().populate('user')
             res.status(200).json(bookings)
         } catch (error) {
-            res.status(500).json(error);    
+            res.status(500).json(error);
         }
     },
     //GET AN BOOKING
-    getAnBooking : async (req,res) => {
+    getAnBooking: async (req, res) => {
         try {
             const booking = await Booking.findById(req.params.id).populate('user')
             res.status(200).json(booking)
         } catch (error) {
-            res.status(500).json(error);    
+            res.status(500).json(error);
         }
     },
     //UPDATE
-    updateBooking : async (req,res) => {
+    updateBooking: async (req, res) => {
         try {
             const booking = await Booking.findById(req.params.id).populate('user')
             await booking.updateOne({ '$set': req.body });
@@ -51,15 +51,15 @@ const bookingController = {
                 { bookings: req.params.id }, // Find users with the booking ID
                 { $pull: { bookings: req.params.id } } // Pull the booking ID from the array
             );
-    
+
             // Delete the booking
             await Booking.findByIdAndDelete(req.params.id);
-    
+
             res.status(200).json("Delete Successfully");
         } catch (error) {
             res.status(500).json(error);
         }
     }
-    
+
 }
 module.exports = bookingController;

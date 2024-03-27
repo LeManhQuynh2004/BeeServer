@@ -24,7 +24,7 @@ const photosController = {
             res.status(500).json(error);
         }
     },
-    getAnPhoto : async (req,res) => {
+    getAnPhoto: async (req, res) => {
         try {
             const photo = await Photo.findById(req.params.id).populate('user')
             res.status(200).json(photo);
@@ -32,7 +32,7 @@ const photosController = {
             res.status(500).json(error);
         }
     },
-    updatePhoto : async (req,res) => {
+    updatePhoto: async (req, res) => {
         try {
             const photo = await Photo.findById(req.params.id);
             await photo.updateOne({ '$set': req.body });
@@ -41,9 +41,9 @@ const photosController = {
             res.status(500).json(error);
         }
     },
-    deletePhoto : async (req,res) => {
+    deletePhoto: async (req, res) => {
         try {
-            await User.updateMany({photos : req.params.id},{$pull : req.params.id})
+            await User.updateMany({ photos: req.params.id }, { $pull: req.params.id })
             //User có nhiều ảnh
             //dùng lênh updateMany tìm ảnh của tác giả đó và lấy ra khỏi array đó
             await Photo.findByIdAndDelete(req.params.id);
