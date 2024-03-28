@@ -1,6 +1,19 @@
 const { Photo, User } = require('../model/model')
 
 const photosController = {
+    getPagePhotos: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 5;
+            console.log(page)
+            console.log(limit)
+            const skip = (page - 1) * limit;
+            const cursors = await User.find().skip(skip).limit(limit);
+            res.status(200).json(cursors)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
     //POST PHOTO
     addPhoto: async (req, res) => {
         try {

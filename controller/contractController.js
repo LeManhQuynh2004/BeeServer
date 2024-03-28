@@ -12,7 +12,7 @@ const ContractController = {
     addContract: async (req, res) => {
         try {
             const contract = new Contract(req.body);
-            await contract.save()
+            await contract.save();
             res.status(200).json("Add SUCCESS FULLY");
         } catch (error) {
             res.status(500).json(error);

@@ -19,7 +19,7 @@ let albumRouter = require('./routes/album');
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect("mongodb+srv://quynhlmph32353:qnkRTuU9PrE3L9iW@cluster0.e7sqtqm.mongodb.net/BeeStudio")
   .then(() => console.log('Connected!'))
   .catch(error => console.error('Connection error:', error));
 
@@ -52,17 +52,12 @@ app.use("/uploads", express.static("uploads"));
 app.use('/', (req, res, next) => {
   res.status(200).render('index');
 });
-
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
-// error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

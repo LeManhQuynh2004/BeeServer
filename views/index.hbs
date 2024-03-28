@@ -128,7 +128,7 @@
             <a href="#" class="btn" id="btn_add">Thêm</a>
           </div>
           <div class="content">
-            <table>
+            <table class=".is-centered">
               <thead>
                 <tr>
                   <th>STT</th>
@@ -145,6 +145,21 @@
               </tbody>
             </table>
           </div>
+          <div class="pagination is-centered" role="navigation" aria-label="pagination">
+            {{!-- <a class="pagination-previous">Previous</a>
+            <a class="pagination-next">Next</a> --}}
+            <ul class="pagination-list">
+              <li>
+                <a class="pagination-link is-current" id="page_1" aria-label="Goto page 1">1</a>
+              </li>
+              <li>
+                <a class="pagination-link " id="page_2" aria-label="Goto page 2">2</a>
+              </li>
+              <li>
+                <a class="pagination-link" id="page_3" aria-label="Goto page 3">3</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -159,7 +174,45 @@
       navigation.classList.toggle("active");
       main.classList.toggle("active");
     };
+
     let body = document.querySelector('#app')
+    let page_1 = document.querySelector('#page_1')
+    let page_2 = document.querySelector('#page_2')
+    let page_3 = document.querySelector('#page_3')
+    let page = 1;
+    page_1.addEventListener('click', () => {
+      page = 1
+      page_1.classList.add('is-current');
+      page_2.classList.remove('is-current')
+      page_3.classList.remove('is-current')
+      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+        .then((res) => res.json())
+        .then((data) => renderData(data))
+        .catch((err) => console.log(err));
+      console.log(page)
+    })
+    page_2.addEventListener('click', () => {
+      page_2.classList.add('is-current');
+      page_1.classList.remove('is-current')
+      page_3.classList.remove('is-current')
+      page = 2
+      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+        .then((res) => res.json())
+        .then((data) => renderData(data))
+        .catch((err) => console.log(err));
+        console.log(page)
+    })
+    page_3.addEventListener('click', () => {
+      page_3.classList.add('is-current');
+      page_1.classList.remove('is-current')
+      page_2.classList.remove('is-current')
+      page = 3
+      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+        .then((res) => res.json())
+        .then((data) => renderData(data))
+        .catch((err) => console.log(err));
+        console.log(page)
+    })
     let content = document.querySelector('.content')
     let btn_add = document.querySelector('#btn_add')
     btn_add.addEventListener('click', () => {
@@ -250,13 +303,9 @@
                                overflow: hidden;
                                text-overflow: ellipsis;
                                white-space: nowrap;">${item.describe}</td>
-                  <td  style = "max-width: 110px;
-                               overflow: hidden;
-                               text-align : center;
-                               text-overflow: ellipsis;
-                               white-space: wrap;">
+                  <td>
                     <button class="btn-danger btn_delete" data-id="${item._id
-          }">Xóa</button> |
+          }">Xóa</button>
                     <button class="btn-primary btn_update" data-id="${item._id
           }">Sửa</button>
                     </td>

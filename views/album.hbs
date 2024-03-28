@@ -123,7 +123,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Quản lý đặt lịch</h2>
+                        <h2>Quản lý Album ảnh</h2>
                         <a href="#" class="btn" id="btn_add">Thêm</a>
                     </div>
                     <div class="content">
@@ -131,9 +131,12 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Họ tên</th>
-                                    <th>Email</th>
-                                    <th>Số điện thoại</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Người đặt</th>
+                                    <th>Giá thành</th>
+                                    <th>Số lượng</th>
+                                    <th>Kích thước</th>
+                                    <th>Chất liệu</th>
                                     <th>Ghi chú</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -149,56 +152,7 @@
         </div>
     </div>
     </div>
-    <script>
-        let toggle = document.querySelector(".toggle");
-        let navigation = document.querySelector(".navigation");
-        let main = document.querySelector(".main");
-
-        toggle.onclick = function () {
-            navigation.classList.toggle("active");
-            main.classList.toggle("active");
-        };
-
-        const url = "http://localhost:3000/booking/data"
-        let body = document.querySelector('#app')
-        const handleCallData = () => {
-            fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
-        }
-const renderData = (data) => {
-    let htmls = data.map((item, index) => {
-        return `
-        <tr style="text-align: center">
-            <td style="text-align: center">${index + 1}</td>
-            <td style="text-align: center">${item.name}</td>
-            <td style="text-align: center">${item.user.email}</td>
-            <td style="text-align: center">${item.phoneNumber}</td>
-            <td style="text-align: center">${item.message}</td>
-            <td style="text-align: center">
-                <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
-                <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
-            </td>
-        </tr>
-        `;
-    });
-    body.innerHTML = htmls.join('');
-    const btn_delete = document.querySelectorAll('.btn_delete');
-    for (const btn of btn_delete) {
-        const id = btn.dataset.id;
-        btn.addEventListener('click', () => {
-            return confirm("Bạn có chắc chắn muốn xóa không ?") ? handleDeleteData(id) : "";
-        });
-    }
-};
-        const handleDeleteData = (id) => {
-            fetch(`${url}/${id}`,{
-                method : 'DELETE'
-            }).then(res => res.json()).then(() => {
-                alert("Xóa thành công");
-                window.location.reload();
-            }).catch(err => console.log(err))
-        }
-        handleCallData();
-    </script>
+    <script></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

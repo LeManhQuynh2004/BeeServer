@@ -1,6 +1,18 @@
 const { Dress } = require('../model/model')
 
 const weddingDressController = {
+    //Get Page Dress
+    getPageDress : async (req,res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 5;
+            const skip = (page - 1) * limit;
+            const dress = await Dress.find().skip(skip).limit(limit);
+            res.status(200).json(dress)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
     //POST DRESS
     addDress: async (req, res) => {
         try {

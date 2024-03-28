@@ -39,6 +39,8 @@ router.post("/data", upload.array('image', 5), async (req, res, next) => {
 // Lấy tất cả người dùng
 router.get('/data', dressController.getAllDress);
 
+router.get('/data/page',dressController.getPageDress);
+
 // Lấy một người dùng cụ thể
 router.get('/data/:id', dressController.getAnDress);
 

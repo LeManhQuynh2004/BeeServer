@@ -27,9 +27,11 @@ router.post("/uploadfile", upload.single("avatar"), async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 // Lấy tất cả người dùng
 router.get('/data', userController.getAllUser);
+
+// Lấy người dùng page
+router.get('/data/page', userController.getUserPage);
 
 // Lấy một người dùng cụ thể
 router.get('/data/:id', userController.getAnUser);

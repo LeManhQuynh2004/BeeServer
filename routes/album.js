@@ -3,7 +3,7 @@ const albumController = require('../controller/AlbumController');
 const router = require('express').Router();
 
 router.get('/', function(req, res, next) {
-    res.render('booking');
+    res.render('album');
 });
 
 router.get("/data", albumController.getAllData);

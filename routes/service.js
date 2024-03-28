@@ -25,7 +25,6 @@ router.post("/", upload.array('image', 5), async (req, res) => {
             utilities: data.utilities,
             result: data.result
         });
-
         await newUser.save();// Lưu vào cơ sở dữ liệu
         res.status(200).redirect('http://localhost:3000/');
     } catch (err) {
@@ -33,9 +32,11 @@ router.post("/", upload.array('image', 5), async (req, res) => {
         res.status(500).json({ message: "Internal server error." });
     }
 });
-
 //GET SERVICE
 router.get('/', serviceController.getAllService);
+
+//GET PAGE SERVICE
+router.get('/page', serviceController.getPageServer);
 
 //GET AN SERVICE
 router.get("/:id", serviceController.getAnService)

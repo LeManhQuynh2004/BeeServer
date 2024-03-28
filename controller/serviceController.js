@@ -10,6 +10,19 @@ const serviceController = {
             res.status(500).json(err);
         }
     },
+
+    getPageServer: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 5;
+            const skip = (page - 1) * limit;
+            const services = await Service.find().skip(skip).limit(limit);
+            res.status(200).json(services)
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    
     //GET ALL SERVICE
     getAnService: async (req, res) => {
         try {
@@ -19,6 +32,7 @@ const serviceController = {
             res.status(500).json(err);
         }
     },
+
     //DELETE SERVICE
     deleteData: async (req, res) => {
         try {
