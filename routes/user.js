@@ -14,7 +14,7 @@ router.post("/uploadfile", upload.single("avatar"), async (req, res) => {
     try {
         const data = req.body;
         const file = req.file;
-        if (file !== null) {
+        if (file == null) {
             const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${file.filename}`;
             const newUser = new User({
                 username: data.username,
