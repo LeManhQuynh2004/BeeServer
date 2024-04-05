@@ -26,7 +26,7 @@ mongoose.connect("mongodb+srv://quynhlmph32353:qnkRTuU9PrE3L9iW@cluster0.e7sqtqm
 const app = express();
 app.use(cors());
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));  
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));

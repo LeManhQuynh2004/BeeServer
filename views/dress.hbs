@@ -145,6 +145,21 @@
 
                             </tbody>
                         </table>
+                        <div class="pagination is-centered" role="navigation" aria-label="pagination">
+                            {{!-- <a class="pagination-previous">Previous</a>
+                            <a class="pagination-next">Next</a> --}}
+                            <ul class="pagination-list">
+                                <li>
+                                    <a class="pagination-link is-current" id="page_1" aria-label="Goto page 1">1</a>
+                                </li>
+                                <li>
+                                    <a class="pagination-link " id="page_2" aria-label="Goto page 2">2</a>
+                                </li>
+                                <li>
+                                    <a class="pagination-link" id="page_3" aria-label="Goto page 3">3</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,18 +186,18 @@
             let htmls = data.map((item, index) => {
                 return `
                     <tr class = "text-center">
-                            <td style = "text-align : center">${index + 1}</td>
-                            <td style = "text-align : center"> <span>
+                            <td>${index + 1}</td>
+                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">
                             ${item.name}
-                            </span></td>
-                            <td style = "text-align : center"><span>${item.price.toLocaleString()} VND</span></td>
-                            <td style = "text-align : center">${item.rental_price.toLocaleString()} VND</td>
-                            <td style = "text-align : center">
+                            </td>
+                            <td><span>${item.price.toLocaleString()} VND</span></td>
+                            <td>${item.rental_price.toLocaleString()} VND</td>
+                            <td>
                             <img src="${item.image[0]}" alt="" style="width: 70px; height: 70px; border-radius: 10px;">
                             </td>
-                            <td style = "text-align : center">${item.describe}</td>
-                            <td style = "text-align : center">
-                                <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                            <td>${item.describe}</td>
+                            <td>
+                                <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button>
                                 <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
                             </td>
                         </tr>

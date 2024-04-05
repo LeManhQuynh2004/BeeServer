@@ -252,7 +252,9 @@ body {
   color: var(--white);
   border-radius: 6px;
 }
-
+table {
+  table-layout: fixed;
+}
 .details table {
   width: 100%;
   border-collapse: collapse;

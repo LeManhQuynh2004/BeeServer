@@ -136,7 +136,6 @@
                                     <th>Giá thành</th>
                                     <th>Số lượng</th>
                                     <th>Kích thước</th>
-                                    <th>Chất liệu</th>
                                     <th>Ghi chú</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -153,7 +152,6 @@
     </div>
     </div>
     <script>
-
         let toggle = document.querySelector(".toggle");
         let navigation = document.querySelector(".navigation");
         let main = document.querySelector(".main");
@@ -172,21 +170,17 @@
 
             let htmls = data.map((item, index) => {
                 return `
-       <tr class = "text-center">
-                    <td style="text-align">${index + 1}</td>
-                    <td style="text-align"><img class="info" 
-                          data-bs-toggle="offcanvas" 
-                          data-bs-target="#offcanvasRight" 
-                          aria-controls="offcanvasRight" 
-                          data-id="${item._id}" src="${item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
-                    <td style="text-align">${item.user.email}</td>
-                    <td style="text-align">${item.price} VND</td>
-                    <td style="text-align">${item.quantity}</td>
-                    <td style="text-align">${item.size}</td>
-                    <td style="text-align">${item.material}</td>
-                    <td style="text-align">${item.node}</td>
-                    <td style="text-align">
-                        <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                 <tr>
+                    <td>${index + 1}</td>
+                    <td><img src="${item.image}" alt="" style="width: 70px; height: 70px; border-radius: 10px;"></td>
+                    <td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">${item.user.email}</td>
+                    <td>${item.price} VND</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.size}</td>
+                    {{!-- <td>${item.material}</td> --}}
+                    <td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">${item.node}</td>
+                    <td>
+                        <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button>
                         <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
                     </td>
                 </tr>

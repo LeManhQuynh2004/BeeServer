@@ -25,7 +25,7 @@
                 <li>
                     <a href="http://localhost:3000/">
                         <span class="icon">
-                        <ion-icon name="home-outline"></ion-icon>
+                            <ion-icon name="home-outline"></ion-icon>
                         </span>
                         <span class="title">Trang chủ</span>
                     </a>
@@ -117,36 +117,52 @@
                 </div>
 
                 <div class="user">
-                    <img src="https://glints.com/vn/blog/wp-content/uploads/2022/05/customer-service-la%CC%80-gi%CC%80.jpg" alt="">
+                    <img src="https://glints.com/vn/blog/wp-content/uploads/2022/05/customer-service-la%CC%80-gi%CC%80.jpg"
+                        alt="">
                 </div>
             </div>
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h1>Quản lý người dùng</h1>
-                        <a href="#" class="btn" id = "btn_add">Thêm</a>
-                    </div>  
-                   <div class="content">
-                     <table>
-                        <thead>
-                            <tr>
-                                  <th>STT</th>
-                                  <th>Email</th>
-                                  <th>Mật Khẩu</th>
-                                  <th>Họ tên</th>
-                                  <th>Chức vụ</th>
-                                  <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody id="app">
+                        <a href="#" class="btn" id="btn_add">Thêm</a>
+                    </div>
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Email</th>
+                                    <th>Mật Khẩu</th>
+                                    <th>Họ tên</th>
+                                    <th>Chức vụ</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="app">
 
-                        </tbody>
-                    </table>
-                   </div>
+                            </tbody>
+                        </table>
+                        <div class="pagination is-centered" role="navigation" aria-label="pagination">
+                            {{!-- <a class="pagination-previous">Previous</a>
+                            <a class="pagination-next">Next</a> --}}
+                            <ul class="pagination-list">
+                                <li>
+                                    <a class="pagination-link is-current" id="page_1" aria-label="Goto page 1">1</a>
+                                </li>
+                                <li>
+                                    <a class="pagination-link " id="page_2" aria-label="Goto page 2">2</a>
+                                </li>
+                                <li>
+                                    <a class="pagination-link" id="page_3" aria-label="Goto page 3">3</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                </div> 
             </div>
         </div>
+    </div>
     </div>
     <script>
         let toggle = document.querySelector(".toggle");
@@ -216,17 +232,17 @@
             let htmls = data.map((item, index) => {
                 return `
                 <tr>
-                <td style="text-align: center">${index + 1}</td>
-                <td style="text-align: center"><span>${item.email}</span></td>
-                <td style="text-align: center"><span class="password-field">${'*'.repeat(item.password.length)}</span></td>
-                <td style="text-align: center">${item.username}</td>
-                <td style="text-align: center">${item.role === 0 ? "Quản trị" : "Người dùng"}</td>
+                <td>${index + 1}</td>
+                <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;"><span>${item.email}</span></td>
+                <td><span class="password-field">${'*'.repeat(item.password.length)}</span></td>
+                <td>${item.username}</td>
+                <td>${item.role === 0 ? "Quản trị" : "Người dùng"}</td>
                 <td style = "max-width: 150px;
                                     overflow: hidden;
                                     text-align : center;
                                     text-overflow: ellipsis;
                                     white-space: wrap;">
-                    <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button> |
+                    <button class="btn btn-danger btn_delete" data-id="${item._id}">Xóa</button>
                     <button class="btn btn-primary btn_update" data-id="${item._id}">Sửa</button>
                 </td>
                 </tr>

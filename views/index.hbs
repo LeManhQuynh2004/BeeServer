@@ -128,7 +128,7 @@
             <a href="#" class="btn" id="btn_add">Thêm</a>
           </div>
           <div class="content">
-            <table class=".is-centered">
+            <table class="">
               <thead>
                 <tr>
                   <th>STT</th>
@@ -185,7 +185,7 @@
       page_1.classList.add('is-current');
       page_2.classList.remove('is-current')
       page_3.classList.remove('is-current')
-      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+      fetch(`${url}/page?page=${page}&limit=1`)
         .then((res) => res.json())
         .then((data) => renderData(data))
         .catch((err) => console.log(err));
@@ -196,22 +196,22 @@
       page_1.classList.remove('is-current')
       page_3.classList.remove('is-current')
       page = 2
-      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+      fetch(`${url}/page?page=${page}&limit=1`)
         .then((res) => res.json())
         .then((data) => renderData(data))
         .catch((err) => console.log(err));
-        console.log(page)
+      console.log(page)
     })
     page_3.addEventListener('click', () => {
       page_3.classList.add('is-current');
       page_1.classList.remove('is-current')
       page_2.classList.remove('is-current')
       page = 3
-      fetch(`http://localhost:3000/service/page?page=${page}&limit=1`)
+      fetch(`${url}/page?page=${page}&limit=1`)
         .then((res) => res.json())
         .then((data) => renderData(data))
         .catch((err) => console.log(err));
-        console.log(page)
+      console.log(page)
     })
     let content = document.querySelector('.content')
     let btn_add = document.querySelector('#btn_add')
@@ -289,8 +289,8 @@
       let html = data.map((item, index) => {
         return `
             <tr>
-                  <td>${index + 1}</td>
-                        <td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">
+                  <td style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">${index + 1}</td>
+                      <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">
                     <span>
                       ${item.name}
                     </span>
@@ -329,72 +329,107 @@
           const id = btn.dataset.id;
           fetch(`${url}/${id}`).then(res => res.json()).then((data) => {
             content.innerHTML = `
-                      <form style = "margin-top: 10px;" enctype="multipart/form-data" method="PUT">    
-
-                    <div class="field">
-                      <label class="label">Tên dịch vụ</label>
-                      <div class="control">
-                        <input class="input is-rounded" type="text" value = "${data.name}" name = "name" placeholder="Rounded input" />
+                    <form id = "form-service" style="margin-top: 10px;" enctype="multipart/form-data" method="PUT">
+                      <div class="field">
+                          <label class="label">Tên dịch vụ</label>
+                          <div class="control">
+                              <input class="input is-rounded" type="text" value="${data.name}" name="name" placeholder="Tên dịch vụ" />
+                          </div>
                       </div>
-                    </div> 
 
-                    <div class="field">
-                      <label class="label">Giá dịch vụ</label>
-                      <div class="control">
-                        <input class="input is-rounded" type="text" value = "${data.price}" name="price" placeholder="Rounded input" />
+                      <div class="field">
+                          <label class="label">Giá dịch vụ</label>
+                          <div class="control">
+                              <input class="input is-rounded" type="text" value="${data.price}" name="price" placeholder="Giá dịch vụ" />
+                          </div>
                       </div>
-                    </div>
 
-                    <div class="field">
-                      <label class="label">Hình ảnh sản phẩm :</label>
-                      <div class="control">
-                        <input class="input is-rounded" type="file" name="image" placeholder="Rounded input" />
+                      <div class="field">
+                          <label class="label">Hình ảnh sản phẩm</label>
+                          <div class="control">
+                              <input class="input is-rounded" type="text" value="${data.image}" name="image" placeholder="Đường dẫn ảnh" />
+                          </div>
                       </div>
-                    </div>
 
-                    {{!-- <div class="field">
-                      <figure class="image is-128x128">
-                        <img class="is-rounded" src="${data.image[0]}" />
-                      </figure>
-                    </div> --}}
-
-                    <div class="field">
-                      <label class="label">Mô tả sản phẩm :</label>
-                      <div class="control">
-                        <textarea class="textarea" name = "describe" placeholder="Textarea">${data.describe}</textarea>
+                      <div class="field">
+                          <label class="label">Mô tả sản phẩm</label>
+                          <div class="control">
+                              <textarea class="textarea" name="describe" placeholder="Mô tả sản phẩm">${data.describe}</textarea>
+                          </div>
                       </div>
-                    </div>
 
-                    <div class="field">
-                      <label class="label">Địa chỉ :</label>
-                      <div class="control">
-                        <input class="input is-rounded" type="text" name="location" value = "${data.location}" placeholder="Rounded input" />
+                      <div class="field">
+                          <label class="label">Địa chỉ</label>
+                          <div class="control">
+                              <input class="input is-rounded" type="text" name="location" value="${data.location}" placeholder="Địa chỉ" />
+                          </div>
                       </div>
-                    </div>
 
-                    <div class="field">
-                      <label class="label">Thời gian</label>
-                      <div class="control">
-                        <input class="input is-rounded" type="text" name="time" value = "${data.time}" placeholder="Rounded input" />
+                      <div class="field">
+                          <label class="label">Thời gian</label>
+                          <div class="control">
+                              <input class="input is-rounded" type="text" name="time" value="${data.time}" placeholder="Thời gian" />
+                          </div>
                       </div>
-                    </div>
 
-                    <div class="field">
-                      <label class="label">Tiện ích đi kèm :</label>
-                      <div class="control">
-                        <textarea class="textarea" name = "utilities" placeholder="Textarea">${data.utilities}</textarea>
+                      <div class="field">
+                          <label class="label">Tiện ích đi kèm</label>
+                          <div class="control">
+                              <textarea class="textarea" name="utilities" placeholder="Tiện ích đi kèm">${data.utilities}</textarea>
+                          </div>
                       </div>
-                    </div>
 
-                    <div class="field">
-                      <label class="label">Kết quả nhận được :</label>
-                      <div class="control">
-                        <textarea class="textarea" name = "result"  placeholder="Textarea">${data.result}</textarea>
+                      <div class="field">
+                          <label class="label">Kết quả nhận được</label>
+                          <div class="control">
+                              <textarea class="textarea" name="result" placeholder="Kết quả nhận được">${data.result}</textarea>
+                          </div>
                       </div>
-                    </div>
-                    <div style = "text-align : center;"><button class = "button is-primary" type="submit" id='btn_submit'>Thêm</button></div>
+
+                      <div style="text-align: center;">
+                          <button class="button is-primary" type="submit" id="btn_submit">Sửa</button>
+                      </div>
                   </form>
             `
+            const form = document.getElementById('form-service');
+            form.addEventListener('submit', function (event) {
+              // Prevent the default form submission behavior
+              event.preventDefault();
+
+              const formData = new FormData(form);
+
+              const serviceName = formData.get('name');
+              const servicePrice = formData.get('price');
+              const serviceImage = formData.get('image');
+              const serviceDescription = formData.get('describe');
+              const serviceLocation = formData.get('location');
+              const serviceTime = formData.get('time');
+              const serviceUtilities = formData.get('utilities');
+              const serviceResult = formData.get('result');
+
+              const service = {
+                name: serviceName,
+                price: servicePrice,
+                image: serviceImage,
+                describe: serviceDescription,
+                location: serviceLocation,
+                time: serviceTime,
+                utilities: [serviceUtilities],
+                result: [serviceResult]
+              }
+              console.log(service)
+
+              fetch(`${url}/${data._id}`, {
+                method: 'PUT',
+                headers: {
+                  "Content-type": "application/json"
+                },
+                body: JSON.stringify(service)
+              }).then(res => res.json()).then((data) => {
+                alert("Sửa thành công")
+                window.location.reload()
+              }).catch(err => console.log(err))
+            });
           }).catch(err => console.log(err))
         });
       }
