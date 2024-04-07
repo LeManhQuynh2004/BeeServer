@@ -14,7 +14,7 @@ router.post("/uploadfile", upload.single("avatar"), async (req, res) => {
     try {
         const data = req.body;
         const file = req.file;
-        if (file == null) {
+        if (file != null) {
             const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${file.filename}`;
             const newUser = new User({
                 username: data.username,
@@ -31,6 +31,7 @@ router.post("/uploadfile", upload.single("avatar"), async (req, res) => {
                 password: data.password,
                 email: data.email,
                 role: 1,
+                avatar : "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"
             });
             await newUser.save();
             res.status(200).json(newUser);
