@@ -22,7 +22,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/">
+                    <a href="https://beeserver-1.onrender.com">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -31,7 +31,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/users">
+                    <a href="https://beeserver-1.onrender.com/users">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -40,7 +40,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/photos">
+                    <a href="https://beeserver-1.onrender.com/photos">
                         <span class="icon">
                             <ion-icon name="image-outline"></ion-icon>
                         </span>
@@ -49,7 +49,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/dress">
+                    <a href="https://beeserver-1.onrender.com/dress">
                         <span class="icon">
                             <ion-icon name="shirt-outline"></ion-icon>
                         </span>
@@ -58,7 +58,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="https://beeserver-1.onrender.com/dress">
                         <span class="icon">
                             <ion-icon name="images-outline"></ion-icon>
                         </span>
@@ -67,7 +67,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/news">
+                    <a href="https://beeserver-1.onrender.com/news">
                         <span class="icon">
                             <ion-icon name="newspaper-outline"></ion-icon>
                         </span>
@@ -76,7 +76,7 @@
                 </li>
 
                 <li>
-                    <a href="http://localhost:3000/booking">
+                    <a href="https://beeserver-1.onrender.com/booking">
                         <span class="icon">
                             <ion-icon name="calendar-number-outline"></ion-icon>
                         </span>
@@ -164,9 +164,9 @@
         const handleCallData = () => {
             fetch(url).then(res => res.json()).then(renderData).catch(err => console.log(err))
         }
-const renderData = (data) => {
-    let htmls = data.map((item, index) => {
-        return `
+        const renderData = (data) => {
+            let htmls = data.map((item, index) => {
+                return `
         <tr style="text-align: center">
             <td style="text-align: center">${index + 1}</td>
             <td style="text-align: center">${item.name}</td>
@@ -179,19 +179,19 @@ const renderData = (data) => {
             </td>
         </tr>
         `;
-    });
-    body.innerHTML = htmls.join('');
-    const btn_delete = document.querySelectorAll('.btn_delete');
-    for (const btn of btn_delete) {
-        const id = btn.dataset.id;
-        btn.addEventListener('click', () => {
-            return confirm("Bạn có chắc chắn muốn xóa không ?") ? handleDeleteData(id) : "";
-        });
-    }
-};
+            });
+            body.innerHTML = htmls.join('');
+            const btn_delete = document.querySelectorAll('.btn_delete');
+            for (const btn of btn_delete) {
+                const id = btn.dataset.id;
+                btn.addEventListener('click', () => {
+                    return confirm("Bạn có chắc chắn muốn xóa không ?") ? handleDeleteData(id) : "";
+                });
+            }
+        };
         const handleDeleteData = (id) => {
-            fetch(`${url}/${id}`,{
-                method : 'DELETE'
+            fetch(`${url}/${id}`, {
+                method: 'DELETE'
             }).then(res => res.json()).then(() => {
                 alert("Xóa thành công");
                 window.location.reload();
